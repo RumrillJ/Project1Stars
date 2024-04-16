@@ -1,8 +1,9 @@
 package com.revature.controllers;
 
 import com.revature.daos.PlanetDAO;
+import com.revature.daos.StarDAO;
 import com.revature.models.Planet;
-import org.apache.coyote.Response;
+import com.revature.models.Star;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +15,12 @@ import java.util.List;
 public class PlanetController {
 
     private PlanetDAO planetDAO;
+    private StarDAO starDAO;
 
     @Autowired
-    public PlanetController(PlanetDAO planetDAO){
+    public PlanetController(PlanetDAO planetDAO, StarDAO starDAO){
         this.planetDAO = planetDAO;
+        this.starDAO =  starDAO;
     }
 
 
@@ -33,9 +36,11 @@ public class PlanetController {
     }
 
 
-    @PostMapping
-    public ResponseEntity<Planet> addPlanet(@RequestBody Planet planet){
-        return ResponseEntity.accepted().body(planetDAO.save(planet));
+    @PostMapping("/{starId}") //insert a planet to a star system
+    public ResponseEntity<Planet> insertPlanetToStar(@RequestBody Planet planet, @PathVariable int starId){
+        Star star = starDAO.findById(starId).get();
+        planet.setStar(star);
+        return ResponseEntity.status(201).body(planetDAO.save(planet));
     }
 
     @PutMapping
@@ -49,4 +54,5 @@ public class PlanetController {
         planetDAO.deleteById(planetId);
         return ResponseEntity.accepted().body("Planet " + p.getName() + " has been deleted");
     }
+
 }

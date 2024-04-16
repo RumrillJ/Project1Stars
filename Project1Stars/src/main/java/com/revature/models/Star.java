@@ -1,30 +1,28 @@
 package com.revature.models;
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-@Getter
-@Setter
+//Project Lombok
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 @ToString
 @Entity
-@Table(name="planets")
+@Table(name = "stars")
 @Component
-public class Planet {
+public class Star {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int planetId;
+    private int starId;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    private String starName;
 
     @Column(nullable = false)
-    private int mass; //just use KG
+    private String starColor;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "starId")
-    private Star star; //many planets to one star
 
 }
