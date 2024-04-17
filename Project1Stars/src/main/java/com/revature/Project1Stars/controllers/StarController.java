@@ -34,7 +34,7 @@ public class StarController {
             return ResponseEntity.ok(stars);
         }
 
-        //Get Star by IOD
+        //Get Star by ID
         @GetMapping("/{starId}")
         public ResponseEntity<Star> getStarById(@PathVariable int starId){
             Star s = starDAO.findByStarId(starId);
@@ -42,8 +42,11 @@ public class StarController {
             return ResponseEntity.ok(s);
         }
 
+        //Get all Stars by Planet
+        @GetMapping("/planet/{planetId}")
+
         //Update Star Color
-        @PutMapping("/{starId}")
+        @PatchMapping("/{starId}")
         public ResponseEntity<Star> updateStarColor(@RequestBody Star star, @PathVariable int starId){
             Star s = starDAO.findByStarId(starId);
             if(s == null) return ResponseEntity.status(404).build();
