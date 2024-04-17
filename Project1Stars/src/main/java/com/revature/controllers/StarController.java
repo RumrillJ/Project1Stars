@@ -58,6 +58,4 @@ public class StarController {
             starDAO.deleteById(starId);
             return ResponseEntity.status(204).build();
         }
-
-
 }
