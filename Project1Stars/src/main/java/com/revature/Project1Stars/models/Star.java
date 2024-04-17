@@ -24,7 +24,4 @@ public class Star {
     @Column(nullable = false)
     private String starColor;
 
-    @Column(nullable = false)
-    private int planetID;
-
 }
