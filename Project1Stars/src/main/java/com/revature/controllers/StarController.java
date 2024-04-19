@@ -1,7 +1,7 @@
-package com.revature.Project1Stars.controllers;
+package com.revature.controllers;
 
-import com.revature.Project1Stars.daos.StarDAO;
-import com.revature.Project1Stars.models.Star;
+import com.revature.daos.StarDAO;
+import com.revature.models.Star;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +61,4 @@ public class StarController {
             starDAO.deleteById(starId);
             return ResponseEntity.status(204).build();
         }
-
-
 }

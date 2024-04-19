@@ -1,6 +1,6 @@
-package com.revature.Project1Stars.daos;
+package com.revature.daos;
 
-import com.revature.Project1Stars.models.Star;
+import com.revature.models.Star;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

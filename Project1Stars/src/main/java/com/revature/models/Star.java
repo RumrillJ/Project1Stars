@@ -1,4 +1,4 @@
-package com.revature.Project1Stars.models;
+package com.revature.models;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
