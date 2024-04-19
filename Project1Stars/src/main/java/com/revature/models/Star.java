@@ -1,7 +1,11 @@
 package com.revature.models;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //Project Lombok
 @NoArgsConstructor
@@ -23,5 +27,11 @@ public class Star {
 
     @Column(nullable = false)
     private String starColor;
+
+
+    @OneToMany(mappedBy = "star", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Planet> allPlanets = new ArrayList<>();
+
 
 }
