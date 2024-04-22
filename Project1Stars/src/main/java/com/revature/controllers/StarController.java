@@ -1,6 +1,8 @@
 package com.revature.controllers;
 
+import com.revature.daos.PlanetDAO;
 import com.revature.daos.StarDAO;
+import com.revature.models.Planet;
 import com.revature.models.Star;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import java.util.List;
 public class StarController {
 
         private StarDAO starDAO;
+        private PlanetDAO planetDAO;
 
         @Autowired
         public StarController(StarDAO starDAO){
@@ -42,8 +45,14 @@ public class StarController {
             return ResponseEntity.ok(s);
         }
 
-        //Get all Stars by Planet
-        @GetMapping("/planet/{planetId}")
+        //Get Planet by StarID
+        @GetMapping("/{starId}/planets")
+        public ResponseEntity<List<Planet>> getPlanetsByStarId(@PathVariable int starId) {
+            Star s = starDAO.findByStarId(starId);
+            if (s == null) return ResponseEntity.status(404).build();
+            List<Planet> planets = s.getPlanets();
+            return ResponseEntity.ok(planets);
+        }
 
         //Update Star Color
         @PatchMapping("/{starId}")
@@ -61,4 +70,5 @@ public class StarController {
             starDAO.deleteById(starId);
             return ResponseEntity.status(204).build();
         }
+
 }
